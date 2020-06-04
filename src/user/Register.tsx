@@ -11,8 +11,8 @@ import FormTitle from "../common/components/FormTitle";
 import GlobalContent from "../common/components/GlobalContent";
 import { useErrorHandler } from "../common/utils/ErrorHandler";
 import { goHome } from "../common/utils/Tools";
-import { newUser } from "../store/sessionStore";
 import "../styles.css";
+import { newUser } from "./userApi";
 
 export default function Register(props: RouteComponentProps) {
     const [login, setLogin] = useState("")

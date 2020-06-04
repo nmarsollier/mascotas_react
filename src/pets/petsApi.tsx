@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
-import { logout } from "../store/sessionStore";
 import { environment } from "../app/environment/environment";
+import { logout } from "../user/userApi";
 
 axios.defaults.headers.common["Content-Type"] = "application/json";
 
@@ -16,9 +16,6 @@ export async function loadPets(): Promise<Pet[]> {
         const res = await axios.get(environment.backendUrl + "/v1/pet");
         return Promise.resolve(res.data);
     } catch (err) {
-        if ((err as AxiosError) && err.response && err.response.status === 401) {
-            logout();
-        }
         return Promise.reject(err);
     }
 }
