@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
 import { environment } from "../app/environment/environment";
-import { cleanupStore, updateStoreToken, updateStoreUser } from "../store/sessionStore";
+import { cleanupStore, updateStoreToken, updateStoreUser } from "../store/rxJsStore";
 
 axios.defaults.headers.common["Content-Type"] = "application/json";
 
@@ -86,7 +86,7 @@ export async function newUser(payload: SignUpRequest): Promise<IToken> {
         const res = await axios.post(environment.backendUrl + "/v1/user", payload);
         setCurrentToken(res.data.token);
         updateStoreToken(res.data.token);
-        reloadCurrentUser()
+        reloadCurrentUser().then();
         return Promise.resolve(res.data);
     } catch (err) {
         return Promise.reject(err);

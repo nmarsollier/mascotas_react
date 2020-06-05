@@ -1,12 +1,11 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import FormTitle from "../common/components/FormTitle";
-import { StoredState } from "../store/sessionStore";
 import Form from "../common/components/Form";
+import FormTitle from "../common/components/FormTitle";
+import { useUserState, useTokenState } from "../store/rxJsStore";
 
 export default function StateInfo() {
-    const user = useSelector((state: StoredState) => state.user)
-    const token = useSelector((state: StoredState) => state.token)
+    const user = useUserState()
+    const token = useTokenState();
 
     return (
         <div>
