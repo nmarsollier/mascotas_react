@@ -12,10 +12,10 @@ import GlobalContent from "../common/components/GlobalContent";
 import ImageUpload from "../common/components/ImageUpload";
 import { useErrorHandler } from "../common/utils/ErrorHandler";
 import { goHome } from "../common/utils/Tools";
-import { getProvinces, Province } from "../provinces/provincesApi";
+import { getProvinces, Province } from "../provinces/provincesService";
 import "../styles.css";
 // tslint:disable-next-line:max-line-length
-import { getCurrentProfile, getPictureUrl, updateBasicInfo, updateProfilePicture } from "./profileApi";
+import { getCurrentProfile, getPictureUrl, updateBasicInfo, updateProfilePicture } from "./profileService";
 
 export default function Profile(props: RouteComponentProps) {
     const [address, setAddress] = useState("")

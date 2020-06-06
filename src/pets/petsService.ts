@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
 import { environment } from "../app/environment/environment";
-import { logout } from "../user/userApi";
+import { logout } from "../user/userService";
 
 axios.defaults.headers.common["Content-Type"] = "application/json";
 

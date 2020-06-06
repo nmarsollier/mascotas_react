@@ -12,7 +12,7 @@ import GlobalContent from "../common/components/GlobalContent";
 import { useErrorHandler } from "../common/utils/ErrorHandler";
 import { goHome } from "../common/utils/Tools";
 import "../styles.css";
-import { login } from "./userApi";
+import { login } from "./userService";
 
 export default function Login(props: RouteComponentProps) {
     const [userName, setUserName] = useState("")

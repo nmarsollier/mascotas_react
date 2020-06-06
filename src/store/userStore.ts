@@ -1,5 +1,5 @@
 import { Subject } from "rxjs";
-import { User } from "../user/userApi";
+import { User } from "../user/userService";
 import { useState, useLayoutEffect } from "react";
 
 let currentUser: User | undefined;
