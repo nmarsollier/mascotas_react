@@ -1,11 +1,11 @@
 import React from "react";
-import { useUserState } from "../store/rxJsStore";
 import LoginMenu from "./LoginMenu";
 import MainMenu from "./MainMenu";
 import "./Menu.css";
+import { useSessionUser } from "../store/userStore";
 
 export default function Menu() {
-  const user = useUserState()
+  const user = useSessionUser()
 
   const menu = user ? <MainMenu /> : <LoginMenu />;
 

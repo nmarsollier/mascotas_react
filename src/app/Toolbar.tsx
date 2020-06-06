@@ -1,10 +1,10 @@
 import React from "react";
 import "./Toolbar.css";
 import { environment } from "./environment/environment";
-import { useUserState } from "../store/rxJsStore";
+import { useSessionUser } from "../store/userStore";
 
 export default function Toolbar() {
-  const user = useUserState()
+  const user = useSessionUser()
 
   return (
     <nav className="navbar navbar-expand-sm bg-dark navbar-dark d-flex shadow">

@@ -1,11 +1,12 @@
 import React from "react";
 import Form from "../common/components/Form";
 import FormTitle from "../common/components/FormTitle";
-import { useUserState, useTokenState } from "../store/rxJsStore";
+import { useSessionUser } from "../store/userStore";
+import { useSessionToken } from "../store/tokenStore";
 
 export default function StateInfo() {
-    const user = useUserState()
-    const token = useTokenState();
+    const user = useSessionUser()
+    const token = useSessionToken();
 
     return (
         <div>
