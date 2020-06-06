@@ -1,6 +1,6 @@
 # mascotas_react
 
-UI en react para proyecto mascotas
+UI en react para el [proyecto mascotas](https://github.com/nmarsollier/mascotas)
 
 Abrir ventana de comandos en la carpeta, ejecutar:
 

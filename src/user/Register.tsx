@@ -12,7 +12,7 @@ import GlobalContent from "../common/components/GlobalContent";
 import { useErrorHandler } from "../common/utils/ErrorHandler";
 import { goHome } from "../common/utils/Tools";
 import "../styles.css";
-import { newUser } from "./userApi";
+import { newUser } from "./userService";
 
 export default function Register(props: RouteComponentProps) {
     const [login, setLogin] = useState("")

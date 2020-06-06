@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Pet, loadPets } from "./petsApi";
+import { Pet, loadPets } from "./petsService";
 import "../styles.css";
 import { useErrorHandler } from "../common/utils/ErrorHandler";
 import { goHome } from "../common/utils/Tools";

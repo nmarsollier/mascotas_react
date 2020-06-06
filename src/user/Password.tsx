@@ -11,7 +11,7 @@ import GlobalContent from "../common/components/GlobalContent";
 import { useErrorHandler } from "../common/utils/ErrorHandler";
 import { goHome } from "../common/utils/Tools";
 import "../styles.css";
-import { changePassword } from "./userApi";
+import { changePassword } from "./userService";
 
 
 export default function Password(props: RouteComponentProps) {

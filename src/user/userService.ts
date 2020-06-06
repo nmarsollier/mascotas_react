@@ -1,6 +1,7 @@
 import axios, { AxiosError } from "axios";
 import { environment } from "../app/environment/environment";
-import { cleanupStore, updateStoreToken, updateStoreUser } from "../store/sessionStore";
+import { updateSessionToken, cleanupSessionToken } from "../store/tokenStore";
+import { cleanupSessionUser, updateSessionUser } from "../store/userStore";
 
 axios.defaults.headers.common["Content-Type"] = "application/json";
 
@@ -29,7 +30,8 @@ export async function logout(): Promise<void> {
     } catch (err) {
         return Promise.resolve();
     } finally {
-        cleanupStore()
+        cleanupSessionToken();
+        cleanupSessionUser();
     }
 }
 
@@ -46,7 +48,7 @@ export async function login(payload: Login): Promise<IToken> {
     try {
         const res = await axios.post(environment.backendUrl + "/v1/user/signin", payload);
         setCurrentToken(res.data.token);
-        updateStoreToken(res.data.token);
+        updateSessionToken(res.data.token);
         reloadCurrentUser().then();
         return Promise.resolve(res.data);
     } catch (err) {
@@ -65,7 +67,7 @@ export async function reloadCurrentUser(): Promise<User> {
     try {
         const res = await axios.get(environment.backendUrl + "/v1/users/current");
         localStorage.setItem("user", res.data);
-        updateStoreUser(res.data)
+        updateSessionUser(res.data)
         return Promise.resolve(res.data);
     } catch (err) {
         if ((err as AxiosError) && err.response && err.response.status === 401) {
@@ -85,8 +87,8 @@ export async function newUser(payload: SignUpRequest): Promise<IToken> {
     try {
         const res = await axios.post(environment.backendUrl + "/v1/user", payload);
         setCurrentToken(res.data.token);
-        updateStoreToken(res.data.token);
-        reloadCurrentUser()
+        updateSessionToken(res.data.token);
+        reloadCurrentUser().then();
         return Promise.resolve(res.data);
     } catch (err) {
         return Promise.reject(err);
@@ -115,8 +117,8 @@ if (getCurrentToken()) {
     const currentToken = getCurrentToken();
     if (currentUser !== undefined && currentToken !== undefined) {
         axios.defaults.headers.common.Authorization = "bearer " + getCurrentToken();
-        updateStoreToken(currentToken);
-        updateStoreUser(currentUser);
+        updateSessionToken(currentToken);
+        updateSessionUser(currentUser);
         reloadCurrentUser().then();
     }
 }
