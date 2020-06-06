@@ -1,6 +1,6 @@
 import React from "react"
-import { ErrorHandler } from "../utils/ErrorHandler";
-import ErrorLabel from "./ErrorLabel";
+import { ErrorHandler } from "../utils/ErrorHandler"
+import ErrorLabel from "./ErrorLabel"
 
 interface FormInputProps {
     label: string,

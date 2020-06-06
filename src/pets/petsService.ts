@@ -1,8 +1,5 @@
-import axios, { AxiosError } from "axios";
-import { environment } from "../app/environment/environment";
-import { logout } from "../user/userService";
-
-axios.defaults.headers.common["Content-Type"] = "application/json";
+import axios from "axios"
+import { environment } from "../app/environment/environment"
 
 export interface Pet {
     id: string;
@@ -13,57 +10,45 @@ export interface Pet {
 
 export async function loadPets(): Promise<Pet[]> {
     try {
-        const res = await axios.get(environment.backendUrl + "/v1/pet");
-        return Promise.resolve(res.data);
+        const res = (await axios.get(environment.backendUrl + "/v1/pet")).data as Pet[]
+        return Promise.resolve(res)
     } catch (err) {
-        return Promise.reject(err);
+        return Promise.reject(err)
     }
 }
 
 export async function loadPet(id: string): Promise<Pet> {
     try {
-        const res = await axios.get(environment.backendUrl + "/v1/pet/" + id);
-        return Promise.resolve(res.data);
+        const res = (await axios.get(environment.backendUrl + "/v1/pet/" + id)).data as Pet
+        return Promise.resolve(res)
     } catch (err) {
-        if ((err as AxiosError) && err.response && err.response.status === 401) {
-            logout();
-        }
-        return Promise.reject(err);
+        return Promise.reject(err)
     }
 }
 
 export async function newPet(payload: Pet): Promise<Pet> {
     try {
-        const res = await axios.post(environment.backendUrl + "/v1/pet", payload);
-        return Promise.resolve(res.data as Pet);
+        const res = (await axios.post(environment.backendUrl + "/v1/pet", payload)).data as Pet
+        return Promise.resolve(res)
     } catch (err) {
-        if ((err as AxiosError) && err.response && err.response.status === 401) {
-            logout();
-        }
-        return Promise.reject(err);
+        return Promise.reject(err)
     }
 }
 
 export async function savePet(payload: Pet): Promise<Pet> {
     try {
-        const res = await axios.post(environment.backendUrl + "/v1/pet/" + payload.id, payload);
-        return Promise.resolve(res.data);
+        const res = (await axios.post(environment.backendUrl + "/v1/pet/" + payload.id, payload)).data as Pet
+        return Promise.resolve(res)
     } catch (err) {
-        if ((err as AxiosError) && err.response && err.response.status === 401) {
-            logout();
-        }
-        return Promise.reject(err);
+        return Promise.reject(err)
     }
 }
 
 export async function deletePet(id: string): Promise<void> {
     try {
-        await axios.delete(environment.backendUrl + "/v1/pet/" + id);
-        return Promise.resolve();
+        await axios.delete(environment.backendUrl + "/v1/pet/" + id)
+        return Promise.resolve()
     } catch (err) {
-        if ((err as AxiosError) && err.response && err.response.status === 401) {
-            logout();
-        }
-        return Promise.reject(err);
+        return Promise.reject(err)
     }
 }

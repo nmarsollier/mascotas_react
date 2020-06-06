@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { RouteComponentProps } from 'react-router-dom';
+import { useState } from "react"
+import { RouteComponentProps } from 'react-router-dom'
 
 export function goHome(props: RouteComponentProps) {
-    props.history.push("/");
+    props.history.push("/")
 }
 
 export function useForceUpdate() {

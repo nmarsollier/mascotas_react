@@ -1,7 +1,7 @@
-import React from "react";
+import React from "react"
 
 interface DangerLabelProps {
-    message: string | undefined;
+    message: string | undefined
 }
 
 export default function DangerLabel(props: DangerLabelProps) {

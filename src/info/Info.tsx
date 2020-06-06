@@ -1,12 +1,12 @@
-import React from "react";
-import Form from "../common/components/Form";
-import FormTitle from "../common/components/FormTitle";
-import { useSessionUser } from "../store/userStore";
-import { useSessionToken } from "../store/tokenStore";
+import React from "react"
+import Form from "../common/components/Form"
+import FormTitle from "../common/components/FormTitle"
+import { useSessionUser } from "../store/userStore"
+import { useSessionToken } from "../store/tokenStore"
 
 export default function StateInfo() {
     const user = useSessionUser()
-    const token = useSessionToken();
+    const token = useSessionToken()
 
     return (
         <div>
@@ -31,6 +31,6 @@ export default function StateInfo() {
                 </div>
             </Form>
         </div>
-    );
+    )
 }
 

@@ -1,29 +1,29 @@
-import { Subject } from "rxjs";
-import { User } from "../user/userService";
-import { useState, useLayoutEffect } from "react";
+import { Subject } from "rxjs"
+import { User } from "../user/userService"
+import { useState, useLayoutEffect } from "react"
 
-let currentUser: User | undefined;
+let currentUser: User | undefined
 
-const userSubject = new Subject<User>();
+const userSubject = new Subject<User>()
 
 export function useSessionUser() {
-  const [user, setUser] = useState(currentUser);
+  const [user, setUser] = useState(currentUser)
 
   useLayoutEffect(() => {
     userSubject.subscribe((newState) => {
-      setUser(newState);
-    });
-  }, []);
+      setUser(newState)
+    })
+  }, [])
 
-  return user;
+  return user
 }
 
 export function updateSessionUser(user: User) {
   currentUser =  user
-  userSubject.next(currentUser);
+  userSubject.next(currentUser)
 }
 
 export function cleanupSessionUser() {
-  currentUser = undefined;
-  userSubject.next(currentUser);
+  currentUser = undefined
+  userSubject.next(currentUser)
 }

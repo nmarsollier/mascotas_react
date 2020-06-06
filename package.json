@@ -6,26 +6,6 @@
   },
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@types/node": "14.0.11",
-    "@types/react": "16.9.35",
-    "@types/react-dom": "16.9.8",
-    "@types/react-router-dom": "5.1.5",
-    "rxjs": "6.5.5",
-    "apidoc": "0.23.0",
-    "apidoc-markdown2": "0.3.7",
-    "axios": "0.19.2",
-    "bootstrap": "4.5.0",
-    "jquery": "3.5.1",
-    "popper.js": "1.16.1",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
-    "react-router-dom": "5.2.0",
-    "react-scripts": "3.4.1",
-    "tslint": "6.1.2",
-    "tslint-react": "5.0.0",
-    "typescript": "3.9.5"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -46,5 +26,28 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "dependencies": {
+    "rxjs": "6.5.5",
+    "axios": "0.19.2",
+    "bootstrap": "4.5.0",
+    "jquery": "3.5.1",
+    "popper.js": "1.16.1",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-router-dom": "5.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "14.0.11",
+    "@types/react": "16.9.35",
+    "@types/react-dom": "16.9.8",
+    "@types/react-router-dom": "5.1.5",
+    "@typescript-eslint/eslint-plugin": "^3.1.0",
+    "@typescript-eslint/parser": "^3.1.0",
+    "apidoc": "0.23.0",
+    "apidoc-markdown2": "0.3.7",
+    "eslint-plugin-react": "^7.20.0",
+    "react-scripts": "3.4.1",
+    "typescript": "3.9.5"
   }
 }

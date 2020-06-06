@@ -1,39 +1,39 @@
-import React, { useState, useEffect } from "react";
-import { Pet, loadPets } from "./petsService";
-import "../styles.css";
-import { useErrorHandler } from "../common/utils/ErrorHandler";
-import { goHome } from "../common/utils/Tools";
-import FormButtonBar from "../common/components/FormButtonBar";
-import FormAcceptButton from "../common/components/FormAcceptButton";
-import FormButton from "../common/components/FormButton";
-import FormTitle from "../common/components/FormTitle";
-import GlobalContent from "../common/components/GlobalContent";
-import { RouteComponentProps } from "react-router-dom";
+import React, { useState, useEffect } from "react"
+import { Pet, loadPets } from "./petsService"
+import "../styles.css"
+import { useErrorHandler } from "../common/utils/ErrorHandler"
+import { goHome } from "../common/utils/Tools"
+import FormButtonBar from "../common/components/FormButtonBar"
+import FormAcceptButton from "../common/components/FormAcceptButton"
+import FormButton from "../common/components/FormButton"
+import FormTitle from "../common/components/FormTitle"
+import GlobalContent from "../common/components/GlobalContent"
+import { RouteComponentProps } from "react-router-dom"
 
 export default function Pets(props: RouteComponentProps) {
-    const [pets, setPets] = useState(new Array<Pet>())
+    const [pets, setPets] = useState<Pet[]>([])
 
     const errorHandler = useErrorHandler()
 
     const loadCurrentPets = async () => {
         try {
-            const result = await loadPets();
-            setPets(result);
+            const result = await loadPets()
+            setPets(result)
         } catch (error) {
-            errorHandler.processRestValidations(error);
+            errorHandler.processRestValidations(error)
         }
     }
 
     const editPetClick = (petId: string) => {
-        props.history.push("/editPet/" + petId);
+        props.history.push("/editPet/" + petId)
     }
 
     const newPetClick = () => {
-        props.history.push("/editPet");
+        props.history.push("/editPet")
     }
 
     useEffect(() => {
-        loadCurrentPets()
+        void loadCurrentPets()
         // eslint-disable-next-line
     }, [])
 
@@ -61,7 +61,7 @@ export default function Pets(props: RouteComponentProps) {
                                         onClick={() => editPetClick(pet.id)} />
                                 </td>
                             </tr>
-                        );
+                        )
                     })}
                 </tbody>
             </table>
@@ -71,5 +71,5 @@ export default function Pets(props: RouteComponentProps) {
                 <FormButton label="Cancelar" onClick={() => goHome(props)} />
             </FormButtonBar>
         </GlobalContent>
-    );
+    )
 }

@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import { RouteComponentProps } from "react-router-dom";
-import DangerLabel from "../common/components/DangerLabel";
-import Form from "../common/components/Form";
-import FormAcceptButton from "../common/components/FormAcceptButton";
-import FormButton from "../common/components/FormButton";
-import FormButtonBar from "../common/components/FormButtonBar";
-import FormPassword from "../common/components/FormPassword";
-import FormTitle from "../common/components/FormTitle";
-import GlobalContent from "../common/components/GlobalContent";
-import { useErrorHandler } from "../common/utils/ErrorHandler";
-import { goHome } from "../common/utils/Tools";
-import "../styles.css";
-import { changePassword } from "./userService";
+import React, { useState } from "react"
+import { RouteComponentProps } from "react-router-dom"
+import DangerLabel from "../common/components/DangerLabel"
+import Form from "../common/components/Form"
+import FormAcceptButton from "../common/components/FormAcceptButton"
+import FormButton from "../common/components/FormButton"
+import FormButtonBar from "../common/components/FormButtonBar"
+import FormPassword from "../common/components/FormPassword"
+import FormTitle from "../common/components/FormTitle"
+import GlobalContent from "../common/components/GlobalContent"
+import { useErrorHandler } from "../common/utils/ErrorHandler"
+import { goHome } from "../common/utils/Tools"
+import "../styles.css"
+import { changePassword } from "./userService"
 
 
 export default function Password(props: RouteComponentProps) {
@@ -22,16 +22,16 @@ export default function Password(props: RouteComponentProps) {
     const errorHandler = useErrorHandler()
 
     const updatePasswordClick = async () => {
-        errorHandler.cleanRestValidations();
+        errorHandler.cleanRestValidations()
 
         if (!currentPassword) {
-            errorHandler.addError("currentPassword", "No puede estar vacío");
+            errorHandler.addError("currentPassword", "No puede estar vacío")
         }
         if (!newPassword) {
-            errorHandler.addError("newPassword", "No puede estar vacío");
+            errorHandler.addError("newPassword", "No puede estar vacío")
         }
         if (newPassword !== newPassword2) {
-            errorHandler.addError("newPassword2", "Las contraseñas no coinciden");
+            errorHandler.addError("newPassword2", "Las contraseñas no coinciden")
         }
 
         if (errorHandler.hasErrors()) {
@@ -42,10 +42,10 @@ export default function Password(props: RouteComponentProps) {
             await changePassword({
                 currentPassword,
                 newPassword
-            });
-            props.history?.push("/");
+            })
+            goHome(props)
         } catch (error) {
-            errorHandler.processRestValidations(error);
+            errorHandler.processRestValidations(error)
         }
     }
 
@@ -80,5 +80,5 @@ export default function Password(props: RouteComponentProps) {
                 </FormButtonBar>
             </Form >
         </GlobalContent>
-    );
+    )
 }

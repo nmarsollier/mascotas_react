@@ -1,21 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { RouteComponentProps } from "react-router-dom";
-import DangerLabel from "../common/components/DangerLabel";
-import ErrorLabel from "../common/components/ErrorLabel";
-import Form from "../common/components/Form";
-import FormAcceptButton from "../common/components/FormAcceptButton";
-import FormButton from "../common/components/FormButton";
-import FormButtonBar from "../common/components/FormButtonBar";
-import FormInput from "../common/components/FormInput";
-import FormTitle from "../common/components/FormTitle";
-import GlobalContent from "../common/components/GlobalContent";
-import ImageUpload from "../common/components/ImageUpload";
-import { useErrorHandler } from "../common/utils/ErrorHandler";
-import { goHome } from "../common/utils/Tools";
-import { getProvinces, Province } from "../provinces/provincesService";
-import "../styles.css";
-// tslint:disable-next-line:max-line-length
-import { getCurrentProfile, getPictureUrl, updateBasicInfo, updateProfilePicture } from "./profileService";
+import React, { useEffect, useState } from "react"
+import { RouteComponentProps } from "react-router-dom"
+import DangerLabel from "../common/components/DangerLabel"
+import ErrorLabel from "../common/components/ErrorLabel"
+import Form from "../common/components/Form"
+import FormAcceptButton from "../common/components/FormAcceptButton"
+import FormButton from "../common/components/FormButton"
+import FormButtonBar from "../common/components/FormButtonBar"
+import FormInput from "../common/components/FormInput"
+import FormTitle from "../common/components/FormTitle"
+import GlobalContent from "../common/components/GlobalContent"
+import ImageUpload from "../common/components/ImageUpload"
+import { useErrorHandler } from "../common/utils/ErrorHandler"
+import { goHome } from "../common/utils/Tools"
+import { getProvinces, Province } from "../provinces/provincesService"
+import "../styles.css"
+import {
+    getCurrentProfile,
+    getPictureUrl,
+    updateBasicInfo,
+    updateProfilePicture
+} from "./profileService"
 
 export default function Profile(props: RouteComponentProps) {
     const [address, setAddress] = useState("")
@@ -24,22 +28,22 @@ export default function Profile(props: RouteComponentProps) {
     const [phone, setPhone] = useState("")
     const [picture, setPicture] = useState("")
     const [province, setProvince] = useState("")
-    const [provinces, setProvinces] = useState(new Array<Province>())
+    const [provinces, setProvinces] = useState<Province[]>([])
 
     const errorHandler = useErrorHandler()
 
     const loadProvinces = async () => {
         try {
-            const result = await getProvinces();
-            setProvinces(result);
+            const result = await getProvinces()
+            setProvinces(result)
         } catch (error) {
-            errorHandler.processRestValidations(error);
+            errorHandler.processRestValidations(error)
         }
     }
 
     const loadProfile = async () => {
         try {
-            const result = await getCurrentProfile();
+            const result = await getCurrentProfile()
 
             setAddress(result.address)
             setEmail(result.email)
@@ -49,7 +53,7 @@ export default function Profile(props: RouteComponentProps) {
             setProvince(result.province)
 
         } catch (error) {
-            errorHandler.processRestValidations(error);
+            errorHandler.processRestValidations(error)
         }
     }
 
@@ -57,23 +61,23 @@ export default function Profile(props: RouteComponentProps) {
         try {
             const result = await updateProfilePicture({
                 image,
-            });
-            setPicture(result.id);
+            })
+            setPicture(result.id)
         } catch (error) {
-            errorHandler.processRestValidations(error);
+            errorHandler.processRestValidations(error)
         }
     }
 
     const updateClick = async () => {
-        errorHandler.cleanRestValidations();
+        errorHandler.cleanRestValidations()
         if (!name) {
-            errorHandler.addError("name", "No puede estar vacío");
+            errorHandler.addError("name", "No puede estar vacío")
         }
         if (!email) {
-            errorHandler.addError("email", "No puede estar vacío");
+            errorHandler.addError("email", "No puede estar vacío")
         }
         if (errorHandler.hasErrors()) {
-            return;
+            return
         }
 
         try {
@@ -83,18 +87,17 @@ export default function Profile(props: RouteComponentProps) {
                 name,
                 phone,
                 province,
-            });
-            goHome(props);
+            })
+            goHome(props)
         } catch (error) {
-            errorHandler.processRestValidations(error);
+            errorHandler.processRestValidations(error)
         }
     }
 
     useEffect(() => {
-        loadProvinces();
-        loadProfile();
-        // eslint-disable-next-line
-    }, []);
+        void loadProvinces()
+        void loadProfile()
+    }, [])
 
     return (
         <GlobalContent>
@@ -155,5 +158,5 @@ export default function Profile(props: RouteComponentProps) {
                 </FormButtonBar>
             </Form >
         </GlobalContent>
-    );
+    )
 }

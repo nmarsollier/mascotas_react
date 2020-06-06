@@ -1,11 +1,11 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import "./Menu.css";
-import { logout } from "../user/userService";
+import React from "react"
+import { NavLink } from "react-router-dom"
+import "./Menu.css"
+import { logout } from "../user/userService"
 
 export default function MainMenu() {
   const logoutApp = async () => {
-    await logout();
+    await logout()
   }
 
   return (
@@ -20,5 +20,5 @@ export default function MainMenu() {
       <h6 className="menu_section">Mascotas</h6>
       <NavLink to="/pets" className="menu_item btn btn-sm btn-link">Lista</NavLink><br />
     </div>
-  );
+  )
 }

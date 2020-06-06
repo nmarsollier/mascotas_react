@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 interface ErrorLabelProps {
     message: string | undefined;
@@ -11,5 +11,5 @@ export default function ErrorLabel(props: ErrorLabelProps) {
 
     return (
         <div className="invalid-feedback">{props.message}</div>
-    );
+    )
 }

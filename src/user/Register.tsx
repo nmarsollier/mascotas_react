@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import { RouteComponentProps } from "react-router-dom";
-import DangerLabel from "../common/components/DangerLabel";
-import Form from "../common/components/Form";
-import FormAcceptButton from "../common/components/FormAcceptButton";
-import FormButton from "../common/components/FormButton";
-import FormButtonBar from "../common/components/FormButtonBar";
-import FormInput from "../common/components/FormInput";
-import FormPassword from "../common/components/FormPassword";
-import FormTitle from "../common/components/FormTitle";
-import GlobalContent from "../common/components/GlobalContent";
-import { useErrorHandler } from "../common/utils/ErrorHandler";
-import { goHome } from "../common/utils/Tools";
-import "../styles.css";
-import { newUser } from "./userService";
+import React, { useState } from "react"
+import { RouteComponentProps } from "react-router-dom"
+import DangerLabel from "../common/components/DangerLabel"
+import Form from "../common/components/Form"
+import FormAcceptButton from "../common/components/FormAcceptButton"
+import FormButton from "../common/components/FormButton"
+import FormButtonBar from "../common/components/FormButtonBar"
+import FormInput from "../common/components/FormInput"
+import FormPassword from "../common/components/FormPassword"
+import FormTitle from "../common/components/FormTitle"
+import GlobalContent from "../common/components/GlobalContent"
+import { useErrorHandler } from "../common/utils/ErrorHandler"
+import { goHome } from "../common/utils/Tools"
+import "../styles.css"
+import { newUser } from "./userService"
 
 export default function Register(props: RouteComponentProps) {
     const [login, setLogin] = useState("")
@@ -23,22 +23,22 @@ export default function Register(props: RouteComponentProps) {
     const errorHandler = useErrorHandler()
 
     const registerClick = async () => {
-        errorHandler.cleanRestValidations();
+        errorHandler.cleanRestValidations()
         if (!login) {
-            errorHandler.addError("login", "No puede estar vacío");
+            errorHandler.addError("login", "No puede estar vacío")
         }
         if (!name) {
-            errorHandler.addError("name", "No puede estar vacío");
+            errorHandler.addError("name", "No puede estar vacío")
         }
         if (!password) {
-            errorHandler.addError("password", "No puede estar vacío");
+            errorHandler.addError("password", "No puede estar vacío")
         }
         if (password !== password2) {
-            errorHandler.addError("password2", "Las contraseñas no coinciden");
+            errorHandler.addError("password2", "Las contraseñas no coinciden")
         }
 
         if (errorHandler.hasErrors()) {
-            return;
+            return
         }
 
         try {
@@ -46,10 +46,10 @@ export default function Register(props: RouteComponentProps) {
                 login,
                 name,
                 password,
-            });
+            })
             goHome(props)
         } catch (error) {
-            errorHandler.processRestValidations(error);
+            errorHandler.processRestValidations(error)
         }
     }
 
@@ -94,5 +94,5 @@ export default function Register(props: RouteComponentProps) {
                 </FormButtonBar>
             </Form >
         </GlobalContent>
-    );
+    )
 }

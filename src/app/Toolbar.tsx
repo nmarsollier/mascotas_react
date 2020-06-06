@@ -1,7 +1,7 @@
-import React from "react";
-import "./Toolbar.css";
-import { environment } from "./environment/environment";
-import { useSessionUser } from "../store/userStore";
+import React from "react"
+import "./Toolbar.css"
+import { environment } from "./environment/environment"
+import { useSessionUser } from "../store/userStore"
 
 export default function Toolbar() {
   const user = useSessionUser()
@@ -23,5 +23,5 @@ export default function Toolbar() {
           </a>
       </div>
     </nav>
-  );
+  )
 }

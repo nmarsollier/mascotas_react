@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef } from "react"
 
 interface ImageUploadProps {
     src: string;
@@ -9,21 +9,22 @@ export default function ImageUpload(props: ImageUploadProps) {
     const fileInput = useRef<HTMLInputElement>(null)
 
     const imageClick = () => {
+        // eslint-disable-next-line no-unused-expressions
         fileInput.current?.click()
     }
 
     const imageSelect = () => {
         const files = fileInput.current?.files
         if (files == null) {
-            return;
+            return
         }
         getBase64(
             (files)[0],
             (image) => {
                 if (image && props.onChange) {
-                    props.onChange(image);
+                    props.onChange(image)
                 }
-            });
+            })
     }
 
     return (
@@ -39,13 +40,13 @@ export default function ImageUpload(props: ImageUploadProps) {
                 onChange={imageSelect}
                 style={{ display: "none" }} />
         </div>
-    );
+    )
 }
 
 function getBase64(file: File, cb: (image: string) => void) {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
     reader.onload = () => {
-        cb(reader.result as string);
-    };
+        cb(reader.result as string)
+    }
 }

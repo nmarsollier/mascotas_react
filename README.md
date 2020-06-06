@@ -11,6 +11,14 @@ npm start
 
 Desde un browser debemos abrir [localhost:4200](http://localhost:4200/)
 
+## VSCode
+
+Este proyecto utiliza eslint
+
+```bash
+sudo npm install -g eslint
+```
+
 ## Docker
 
 Podemos usar Docker para levantar este servidor, esta configuración es un build para producción, pero sirve para probarlo:

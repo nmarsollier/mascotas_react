@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { useErrorHandler } from "../common/utils/ErrorHandler";
-import { goHome } from "../common/utils/Tools";
-import "../styles.css";
-import { deletePet, loadPet, newPet, savePet } from "./petsService";
-import DangerLabel from "../common/components/DangerLabel";
-import FormInput from "../common/components/FormInput";
-import FormButtonBar from "../common/components/FormButtonBar";
-import FormAcceptButton from "../common/components/FormAcceptButton";
-import FormButton from "../common/components/FormButton";
-import FormWarnButton from "../common/components/FormWarnButton";
-import FormTitle from "../common/components/FormTitle";
-import Form from "../common/components/Form";
-import GlobalContent from "../common/components/GlobalContent";
-import { RouteComponentProps } from "react-router-dom";
+import React, { useEffect, useState } from "react"
+import { useErrorHandler } from "../common/utils/ErrorHandler"
+import { goHome } from "../common/utils/Tools"
+import "../styles.css"
+import { deletePet, loadPet, newPet, savePet } from "./petsService"
+import DangerLabel from "../common/components/DangerLabel"
+import FormInput from "../common/components/FormInput"
+import FormButtonBar from "../common/components/FormButtonBar"
+import FormAcceptButton from "../common/components/FormAcceptButton"
+import FormButton from "../common/components/FormButton"
+import FormWarnButton from "../common/components/FormWarnButton"
+import FormTitle from "../common/components/FormTitle"
+import Form from "../common/components/Form"
+import GlobalContent from "../common/components/GlobalContent"
+import { RouteComponentProps } from "react-router-dom"
 
 export default function NewPet(props: RouteComponentProps<{ id: string }>) {
     const [birthDate, setBirthDate] = useState("")
@@ -25,53 +25,53 @@ export default function NewPet(props: RouteComponentProps<{ id: string }>) {
     const loadPetById = async (id: string) => {
         if (id) {
             try {
-                const result = await loadPet(id);
+                const result = await loadPet(id)
                 setBirthDate(result.birthDate)
                 setPetId(result.id)
                 setName(result.name)
                 setDescription(result.description)
             } catch (error) {
-                errorHandler.processRestValidations(error);
+                errorHandler.processRestValidations(error)
             }
         }
     }
     const deleteClick = async () => {
         if (petId) {
             try {
-                await deletePet(petId);
-                props.history.push("/pets");
+                await deletePet(petId)
+                props.history.push("/pets")
             } catch (error) {
-                errorHandler.processRestValidations(error);
+                errorHandler.processRestValidations(error)
             }
         }
     }
 
     const saveClick = async () => {
-        errorHandler.cleanRestValidations();
+        errorHandler.cleanRestValidations()
         if (!name) {
-            errorHandler.addError("name", "No puede estar vacío");
+            errorHandler.addError("name", "No puede estar vacío")
         }
 
         if (errorHandler.hasErrors()) {
-            return;
+            return
         }
 
         try {
             if (petId) {
-                await savePet({ id: petId, name, birthDate, description });
+                await savePet({ id: petId, name, birthDate, description })
             } else {
-                await newPet({ id: petId, name, birthDate, description });
+                await newPet({ id: petId, name, birthDate, description })
             }
-            props.history.push("/pets");
+            props.history.push("/pets")
         } catch (error) {
-            errorHandler.processRestValidations(error);
+            errorHandler.processRestValidations(error)
         }
     }
 
     useEffect(() => {
-        const id  = props.match.params.id;
+        const id  = props.match.params.id
         if (id) {
-            loadPetById(id)
+            void loadPetById(id)
         }
         // eslint-disable-next-line
     }, [])
@@ -114,5 +114,5 @@ export default function NewPet(props: RouteComponentProps<{ id: string }>) {
                 </FormButtonBar>
             </Form >
         </GlobalContent>
-    );
+    )
 }

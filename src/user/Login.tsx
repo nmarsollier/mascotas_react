@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import { RouteComponentProps } from "react-router-dom";
-import DangerLabel from "../common/components/DangerLabel";
-import Form from "../common/components/Form";
-import FormAcceptButton from "../common/components/FormAcceptButton";
-import FormButton from "../common/components/FormButton";
-import FormButtonBar from "../common/components/FormButtonBar";
-import FormInput from "../common/components/FormInput";
-import FormPassword from "../common/components/FormPassword";
-import FormTitle from "../common/components/FormTitle";
-import GlobalContent from "../common/components/GlobalContent";
-import { useErrorHandler } from "../common/utils/ErrorHandler";
-import { goHome } from "../common/utils/Tools";
-import "../styles.css";
-import { login } from "./userService";
+import React, { useState } from "react"
+import { RouteComponentProps } from "react-router-dom"
+import DangerLabel from "../common/components/DangerLabel"
+import Form from "../common/components/Form"
+import FormAcceptButton from "../common/components/FormAcceptButton"
+import FormButton from "../common/components/FormButton"
+import FormButtonBar from "../common/components/FormButtonBar"
+import FormInput from "../common/components/FormInput"
+import FormPassword from "../common/components/FormPassword"
+import FormTitle from "../common/components/FormTitle"
+import GlobalContent from "../common/components/GlobalContent"
+import { useErrorHandler } from "../common/utils/ErrorHandler"
+import { goHome } from "../common/utils/Tools"
+import "../styles.css"
+import { login } from "./userService"
 
 export default function Login(props: RouteComponentProps) {
     const [userName, setUserName] = useState("")
@@ -21,25 +21,25 @@ export default function Login(props: RouteComponentProps) {
     const errorHandler = useErrorHandler()
 
     const loginClick = async () => {
-        errorHandler.cleanRestValidations();
+        errorHandler.cleanRestValidations()
         if (!userName) {
-            errorHandler.addError("login", "No puede estar vacío");
+            errorHandler.addError("login", "No puede estar vacío")
         }
         if (!password) {
-            errorHandler.addError("password", "No puede estar vacío");
+            errorHandler.addError("password", "No puede estar vacío")
         }
         if (errorHandler.hasErrors()) {
-            return;
+            return
         }
 
         try {
             await login({
                 login: userName,
                 password
-            });
-            props.history?.push("/");
+            })
+            goHome(props)
         } catch (error) {
-            errorHandler.processRestValidations(error);
+            errorHandler.processRestValidations(error)
         }
     }
 
@@ -68,5 +68,5 @@ export default function Login(props: RouteComponentProps) {
                 </FormButtonBar>
             </Form >
         </GlobalContent >
-    );
+    )
 }
