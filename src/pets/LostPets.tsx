@@ -8,8 +8,9 @@ import FormButton from "../common/components/FormButton"
 import FormTitle from "../common/components/FormTitle"
 import GlobalContent from "../common/components/GlobalContent"
 import { RouteComponentProps } from "react-router-dom"
-import { LostPet, loadLostPets } from "./lostPetsService"
+import { LostPet, loadLostPets, findPet } from "./lostPetsService"
 import { deletePet } from "./petsService"
+
 
 export default function LostPets(props: RouteComponentProps) {
     const [pets, setPets] = useState<LostPet[]>([])
@@ -60,7 +61,7 @@ export default function LostPets(props: RouteComponentProps) {
                                     <img
                                         src="/assets/favicon.png"
                                         alt=""
-                                        onClick={() => deletePet(pet.id)} />
+                                        onClick={() => findPet(pet.id)} />
                                 </td>
                             </tr>
                         )

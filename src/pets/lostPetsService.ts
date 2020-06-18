@@ -1,5 +1,6 @@
 import axios from "axios"
 import { environment } from "../app/environment/environment"
+import Swal from 'sweetalert2'
 
 export interface LostPet {
     id: string;
@@ -31,10 +32,19 @@ export async function newLostPet(payload: LostPet): Promise<LostPet> {
 }
 
 export async function findPet(id: string): Promise<void> {
-    try {
-        await axios.delete(environment.backendUrl + "/v1/lostpet/" + id)
-        return Promise.resolve()
-    } catch (err) {
-        return Promise.reject(err)
-    }
+    Swal.fire({
+        title: "Gracias por encontrar a esta mascota",
+        text: "Porfavor confirma esta acción",
+        type: 'success',
+        showCancelButton: true
+    }).then (async (result) => {
+        try {
+            await axios.delete(environment.backendUrl + "/v1/lostpet/" + id)
+            return Promise.resolve()
+        } catch (err) {
+            return Promise.reject(err)
+        } 
+    })
 }
+
+
