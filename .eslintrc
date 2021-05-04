@@ -385,7 +385,10 @@
         ],
         "use-isnan": "error",
         "valid-typeof": "off",
-        "semi":  [2, "never"]
+        "semi": [
+            2,
+            "never"
+        ]
     },
     "settings": {
         "react": {
