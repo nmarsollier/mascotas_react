@@ -1,14 +1,14 @@
 import { useState } from "react"
-import { RouteComponentProps } from 'react-router-dom'
+import { RouteComponentProps } from "react-router-dom"
 
 export function goHome(props: RouteComponentProps) {
-    props.history.push("/")
+  props.history.push("/")
 }
 
-export function useForceUpdate() {
-    const setForceUpdate = useState(0)[1]
+export function useForceUpdate(): () => any {
+  const setForceUpdate = useState(0)[1]
 
-    return () => {
-        setForceUpdate(Date.now)
-    }
+  return () => {
+    setForceUpdate(Date.now)
+  }
 }

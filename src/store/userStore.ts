@@ -19,7 +19,7 @@ export function useSessionUser() {
 }
 
 export function updateSessionUser(user: User) {
-  currentUser =  user
+  currentUser = user
   userSubject.next(currentUser)
 }
 
