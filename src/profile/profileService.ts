@@ -22,7 +22,7 @@ export async function updateBasicInfo(params: {
     const res = (
       await axios.post(environment.backendUrl + "/v1/profile", params)
     ).data as Profile
-    return Promise.resolve(res)
+    return res
   } catch (err) {
     if ((err as AxiosError).code === "401") {
       void logout()

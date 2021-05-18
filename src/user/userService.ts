@@ -37,7 +37,7 @@ function setCurrentToken(token: string) {
 }
 
 function getCurrentUser(): User | undefined {
-  return (localStorage.getItem("user") as unknown) as User
+  return localStorage.getItem("user") as unknown as User
 }
 
 export async function logout(): Promise<void> {
@@ -48,9 +48,9 @@ export async function logout(): Promise<void> {
     await axios.get(environment.backendUrl + "/v1/user/signout")
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     axios.defaults.headers.common.Authorization = ""
-    return Promise.resolve()
+    return
   } catch (err) {
-    return Promise.resolve()
+    return
   } finally {
     cleanupSessionToken()
     cleanupSessionUser()
@@ -90,7 +90,7 @@ export async function newUser(params: {
   setCurrentToken(res.token)
   updateSessionToken(res.token)
   void reloadCurrentUser().then()
-  return Promise.resolve(res)
+  return res
 }
 
 export async function changePassword(params: {
