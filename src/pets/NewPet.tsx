@@ -15,104 +15,109 @@ import GlobalContent from "../common/components/GlobalContent"
 import { RouteComponentProps } from "react-router-dom"
 
 export default function NewPet(props: RouteComponentProps<{ id: string }>) {
-    const [birthDate, setBirthDate] = useState("")
-    const [description, setDescription] = useState("")
-    const [petId, setPetId] = useState("")
-    const [name, setName] = useState("")
+  const [birthDate, setBirthDate] = useState("")
+  const [description, setDescription] = useState("")
+  const [petId, setPetId] = useState("")
+  const [name, setName] = useState("")
 
-    const errorHandler = useErrorHandler()
+  const errorHandler = useErrorHandler()
 
-    const loadPetById = async (id: string) => {
-        if (id) {
-            try {
-                const result = await loadPet(id)
-                setBirthDate(result.birthDate)
-                setPetId(result.id)
-                setName(result.name)
-                setDescription(result.description)
-            } catch (error) {
-                errorHandler.processRestValidations(error)
-            }
-        }
+  const loadPetById = async (id: string) => {
+    if (id) {
+      try {
+        const result = await loadPet(id)
+        setBirthDate(result.birthDate)
+        setPetId(result.id)
+        setName(result.name)
+        setDescription(result.description)
+      } catch (error) {
+        errorHandler.processRestValidations(error)
+      }
     }
-    const deleteClick = async () => {
-        if (petId) {
-            try {
-                await deletePet(petId)
-                props.history.push("/pets")
-            } catch (error) {
-                errorHandler.processRestValidations(error)
-            }
-        }
+  }
+  const deleteClick = async () => {
+    if (petId) {
+      try {
+        await deletePet(petId)
+        props.history.push("/pets")
+      } catch (error) {
+        errorHandler.processRestValidations(error)
+      }
     }
+  }
 
-    const saveClick = async () => {
-        errorHandler.cleanRestValidations()
-        if (!name) {
-            errorHandler.addError("name", "No puede estar vacío")
-        }
-
-        if (errorHandler.hasErrors()) {
-            return
-        }
-
-        try {
-            if (petId) {
-                await savePet({ id: petId, name, birthDate, description })
-            } else {
-                await newPet({ id: petId, name, birthDate, description })
-            }
-            props.history.push("/pets")
-        } catch (error) {
-            errorHandler.processRestValidations(error)
-        }
+  const saveClick = async () => {
+    errorHandler.cleanRestValidations()
+    if (!name) {
+      errorHandler.addError("name", "No puede estar vacío")
     }
 
-    useEffect(() => {
-        const id  = props.match.params.id
-        if (id) {
-            void loadPetById(id)
-        }
-        // eslint-disable-next-line
-    }, [])
+    if (errorHandler.hasErrors()) {
+      return
+    }
 
-    return (
-        <GlobalContent>
-            <FormTitle>Nueva Mascota</FormTitle>
+    try {
+      if (petId) {
+        await savePet({ id: petId, name, birthDate, description })
+      } else {
+        await newPet({ name, birthDate, description })
+      }
+      props.history.push("/pets")
+    } catch (error) {
+      errorHandler.processRestValidations(error)
+    }
+  }
 
-            <Form>
-                <FormInput
-                    label="Nombre"
-                    name="name"
-                    value={name}
-                    onChange={event => setName(event.target.value)}
-                    errorHandler={errorHandler} />
+  useEffect(() => {
+    const id = props.match.params.id
+    if (id) {
+      void loadPetById(id)
+    }
+  }, [])
 
-                <FormInput
-                    label="Descripción"
-                    name="description"
-                    value={description}
-                    onChange={event => setDescription(event.target.value)}
-                    errorHandler={errorHandler} />
+  return (
+    <GlobalContent>
+      <FormTitle>Nueva Mascota</FormTitle>
 
-                <FormInput
-                    label="Fecha de Nacimiento"
-                    name="birthDate"
-                    value={birthDate}
-                    onChange={event => setBirthDate(event.target.value)}
-                    errorHandler={errorHandler} />
+      <Form>
+        <FormInput
+          label="Nombre"
+          name="name"
+          value={name}
+          onChange={(event) => setName(event.target.value)}
+          errorHandler={errorHandler}
+        />
 
-                <DangerLabel message={errorHandler.errorMessage} />
+        <FormInput
+          label="Descripción"
+          name="description"
+          value={description}
+          onChange={(event) => setDescription(event.target.value)}
+          errorHandler={errorHandler}
+        />
 
-                <FormButtonBar>
-                    <FormAcceptButton label="Guardar" onClick={saveClick} />
+        <FormInput
+          label="Fecha de Nacimiento"
+          name="birthDate"
+          value={birthDate}
+          onChange={(event) => setBirthDate(event.target.value)}
+          errorHandler={errorHandler}
+        />
 
-                    <FormWarnButton hidden={!petId} label="Eliminar" onClick={deleteClick} />
+        <DangerLabel message={errorHandler.errorMessage} />
 
-                    <FormButton label="Cancelar" onClick={() => goHome(props)} />
+        <FormButtonBar>
+          <FormAcceptButton label="Guardar" onClick={saveClick} />
 
-                </FormButtonBar>
-            </Form >
-        </GlobalContent>
-    )
+          <FormWarnButton
+            hidden={!petId}
+            label="Eliminar"
+            onClick={deleteClick}
+          />
+
+          <FormButton label="Cancelar" onClick={() => goHome(props)} />
+        </FormButtonBar>
+      </Form>
+    </GlobalContent>
+  )
 }

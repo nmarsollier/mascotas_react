@@ -27,7 +27,7 @@ export async function updateBasicInfo(params: {
     if ((err as AxiosError).code === "401") {
       void logout()
     }
-    return Promise.reject(err)
+    throw err
   }
 }
 

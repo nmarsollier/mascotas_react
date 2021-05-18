@@ -6,17 +6,16 @@ import Form from "../common/components/Form"
 import FormAcceptButton from "../common/components/FormAcceptButton"
 import FormButton from "../common/components/FormButton"
 import FormButtonBar from "../common/components/FormButtonBar"
+import FormImageUpload from "../common/components/FormImageUpload"
 import FormInput from "../common/components/FormInput"
 import FormTitle from "../common/components/FormTitle"
 import GlobalContent from "../common/components/GlobalContent"
-import ImageUpload from "../common/components/ImageUpload"
 import { useErrorHandler } from "../common/utils/ErrorHandler"
 import { goHome } from "../common/utils/Tools"
 import { getProvinces, Province } from "../provinces/provincesService"
 import "../styles.css"
 import {
   getCurrentProfile,
-  getPictureUrl,
   updateBasicInfo,
   updateProfilePicture,
 } from "./profileService"
@@ -111,11 +110,12 @@ export default function Profile(props: RouteComponentProps) {
           errorHandler={errorHandler}
         />
 
-        <div className="form-group">
-          <label>Profile Picture</label>
-          <ImageUpload src={getPictureUrl(picture)} onChange={uploadPicture} />
-          <ErrorLabel message={errorHandler.getErrorText("name")} />
-        </div>
+        <FormImageUpload
+          picture={picture}
+          name="image"
+          errorHandler={errorHandler}
+          onImageChanged={uploadPicture}
+        />
 
         <FormInput
           label="Email"

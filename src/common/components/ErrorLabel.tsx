@@ -1,10 +1,6 @@
 import React from "react"
 
-interface ErrorLabelProps {
-  message: string | undefined
-}
-
-export default function ErrorLabel(props: ErrorLabelProps) {
+export default function ErrorLabel(props: { message: string | undefined }) {
   if (!props.message) {
     return null
   }

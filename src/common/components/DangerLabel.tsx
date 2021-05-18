@@ -1,10 +1,6 @@
 import React from "react"
 
-interface DangerLabelProps {
-  message: string | undefined
-}
-
-export default function DangerLabel(props: DangerLabelProps) {
+export default function DangerLabel(props: { message: string | undefined }) {
   if (!props.message) {
     return null
   }

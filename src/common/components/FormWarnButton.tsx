@@ -1,13 +1,17 @@
 import React from "react"
 
-interface FormWarnButtonProps {
-    label: string,
-    hidden: boolean,
-    onClick: () => any
-}
-
-export default function FormWarnButton(props: FormWarnButtonProps) {
-    return (
-        <button hidden={props.hidden} className="btn btn-warning" onClick={props.onClick}>{props.label}</button>
-    )
+export default function FormWarnButton(props: {
+  label: string
+  hidden: boolean
+  onClick: () => any
+}) {
+  return (
+    <button
+      hidden={props.hidden}
+      className="btn btn-warning"
+      onClick={props.onClick}
+    >
+      {props.label}
+    </button>
+  )
 }

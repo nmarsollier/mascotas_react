@@ -2,15 +2,13 @@ import React from "react"
 import { ErrorHandler } from "../utils/ErrorHandler"
 import ErrorLabel from "./ErrorLabel"
 
-interface FormInputProps {
+export default function FormInput(props: {
   label: string
   name: string
   errorHandler: ErrorHandler
   value?: string | undefined
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => any
-}
-
-export default function FormInput(props: FormInputProps) {
+}) {
   return (
     <div className="form-group">
       <label>{props.label}</label>
