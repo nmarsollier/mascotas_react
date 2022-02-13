@@ -19,6 +19,7 @@ export default function MainMenu() {
 
       <h6 className="menu_section">Mascotas</h6>
       <NavLink to="/pets" className="menu_item btn btn-sm btn-link">Lista</NavLink><br />
+      <NavLink to="/lostpets" className="menu_item btn btn-sm btn-link">Perdidas</NavLink><br />
     </div>
   )
 }

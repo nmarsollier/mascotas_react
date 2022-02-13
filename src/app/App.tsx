@@ -12,6 +12,8 @@ import Welcome from "../welcome/Welcome"
 import "./App.css"
 import Menu from "./Menu"
 import Toolbar from "./Toolbar"
+import NewLostPet from "../pets/NewLostPets"
+import LostPets from "../pets/LostPets"
 
 export default function App() {
   return (
@@ -37,6 +39,8 @@ export default function App() {
               <LoggedInRoute path="/password" component={Password} />
               <LoggedInRoute path="/profile" component={Profile} />
               <LoggedInRoute path="/pets" component={Pets} />
+              <LoggedInRoute path="/lostpets" component={LostPets} />
+              <LoggedInRoute path="/registerLostPet" component={NewLostPet} />
               <LoggedInRoute path="/editPet" component={NewPet} />
               <LoggedInRoute path="/editPet/:id" component={NewPet} />
             </td>
